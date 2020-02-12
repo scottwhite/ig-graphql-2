@@ -3,6 +3,7 @@ module ig-graphql-2
 go 1.13
 
 require (
+	github.com/Masterminds/squirrel v1.2.0
 	github.com/graph-gophers/graphql-go v0.0.0-20200207002730-8334863f2c8b
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/lib/pq v1.3.0

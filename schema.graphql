@@ -1,17 +1,51 @@
 schema {
   query: Query
+  mutation: Mutation
 }
 
+type Conductor{
+  id: ID!
+  name: String!
+  description: String
+  ipAddress: String!
+  port: Int!
+  organizationId: ID!
+  fingerprint: String!
+  lastPinged: String
+}
+
+input ConductorInput{
+  name: String!
+  organizationId: ID!
+  fingerprint: String!
+  ipAddress: String!
+  port: Int!
+}
 
 type Collector{
   id: ID!
   name: String!
   description: String
-  ipAddres: String!
+  ipAddress: String!
   port: Int!
   organizationId: ID!
   fingerprint: String!
   lastPinged: String
+  conductorId: ID
+}
+
+type Schedule {
+  id: ID!
+  organizationId: ID!
+  name: String!
+  interval:  Int! 
+  conductor: Conductor!
+}
+
+input ScheduleInput {
+  organizationId: ID!
+  name: String!
+  interval:  Int!
   conductorId: ID
 }
 
@@ -66,12 +100,19 @@ type Ci{
   isCloud: Boolean!
 }
 
-input NewCi{
-  name: String!
-  isCloud: Boolean!
-  ciClass: String!
-}
-
 type Query{
   getCis: [Ci]
+  getConductors: [Conductor]
+  getConductor(id: ID!): Conductor
+  getSchedules: [Schedule]
+  getSchedule(id: ID!): Schedule
+}
+
+type Mutation{
+  createConductor(conductor: ConductorInput!): Conductor!
+  updateConductor(conductor: ConductorInput!): Conductor!
+  deleteConductor(id: ID!): Int
+  createSchedule(schedule: ScheduleInput!): Schedule!
+  updateSchedule(schedule: ScheduleInput!): Schedule!
+  deleteSchedule(id: ID!): Int
 }

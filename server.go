@@ -2,6 +2,7 @@ package main
 
 import (
 	"ig-graphql-2/dao"
+	"ig-graphql-2/resolvers"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -27,7 +28,7 @@ func main() {
 		panic(err)
 	}
 	store := dao.NewDAO(conn.DB)
-	r := NewResolver(store)
+	r := resolvers.NewResolver(store)
 
 	schema := graphql.MustParseSchema(s, r, graphql.UseStringDescriptions())
 

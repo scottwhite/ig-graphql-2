@@ -60,3 +60,41 @@ Sample query (db has to exists and be populated)
 ```
 { getCis{name,isCloud,location{name}}}
 ```
+
+
+mutations
+
+create conductor
+```json
+mutation{
+ createConductor(conductor:{
+  name:"bacon pants",
+  organizationId:"00000000-0000-0000-0000-000000000000",
+  fingerprint:"asdfasdfasdfasdfasdf",
+  ipAddress:"127.0.0.1",
+  port:22
+}){
+  id,
+  ipAddress,
+  name
+}
+}
+```
+
+
+create schedule
+```json
+mutation{
+ createSchedule(schedule:{
+  name:"bacon pants sched",
+  organizationId:"00000000-0000-0000-0000-000000000000",
+  conductorId:"228ecd37-4d21-494f-9062-c23043c51e30",
+  interval:1581487323,
+}){
+  id,
+  interval,
+  name
+}
+}
+```
+
