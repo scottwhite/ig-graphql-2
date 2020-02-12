@@ -1,0 +1,77 @@
+schema {
+  query: Query
+}
+
+
+type Collector{
+  id: ID!
+  name: String!
+  description: String
+  ipAddres: String!
+  port: Int!
+  organizationId: ID!
+  fingerprint: String!
+  lastPinged: String
+  conductorId: ID
+}
+
+type Location {
+  id: ID!
+  name: String!
+  latitude: String
+  longitude: String
+  street1: String
+  street2: String
+  city: String
+  zipCode: String
+  organizationId: ID!
+}
+
+type OS{
+  id: String
+  name: String!
+  manufacturerId: ID!
+}
+
+type OSVersion {
+  id: String
+  name: String!
+  version: String!
+  os: OS
+}
+
+enum CiClass {
+  Server
+  File
+  Application
+  Network
+  Storage
+  Security
+}
+
+type Ci{
+  id: ID!
+  name: String!
+  organizationId: ID!
+  comments: String
+  stateId: ID!
+  location: Location
+  lastChecked: String
+  recordSource: String
+  collectorId: String
+  createdOn: String!
+  baselineAt: String
+  sshPort: String
+  ciClass: String!
+  isCloud: Boolean!
+}
+
+input NewCi{
+  name: String!
+  isCloud: Boolean!
+  ciClass: String!
+}
+
+type Query{
+  getCis: [Ci]
+}
